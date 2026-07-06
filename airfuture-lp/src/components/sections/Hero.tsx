@@ -83,7 +83,7 @@ export default function Hero() {
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none">
           <AnimatedSection>
             <AnimatedItem>
-              <div className="mb-4 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm text-white backdrop-blur-md">
+              <div className="glass-deep mb-4 inline-flex items-center rounded-[24px] px-4 py-2 text-sm font-medium text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 医療グレードの空間清浄システム
               </div>
             </AnimatedItem>

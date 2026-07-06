@@ -4,6 +4,8 @@ import { AnimatedSection, AnimatedItem } from "@/components/ui/AnimatedSection";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CaretDown } from "@phosphor-icons/react";
+import SpotlightCard from "@/components/ui/SpotlightCard";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 const faqs = [
   {
@@ -40,33 +42,34 @@ export default function FaqSection() {
           {faqs.map((faq, idx) => (
             <AnimatedSection key={idx}>
               <AnimatedItem>
-                <div 
-                  className="card-surface overflow-hidden cursor-pointer border border-black/5"
-                  onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                <SpotlightCard 
+                  className="glass-deep overflow-hidden cursor-pointer"
                 >
-                  <div className="p-6 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors">
-                    <h3 className="font-bold text-lg text-foreground">{faq.q}</h3>
-                    <CaretDown 
-                      weight="bold" 
-                      className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${openIndex === idx ? "rotate-180" : ""}`} 
-                    />
+                  <div className="relative z-10" onClick={() => setOpenIndex(openIndex === idx ? null : idx)}>
+                    <div className="p-6 flex items-center justify-between bg-white/50 hover:bg-white/70 dark:bg-black/20 dark:hover:bg-black/30 transition-colors">
+                      <h3 className="font-bold text-lg text-foreground">{faq.q}</h3>
+                      <CaretDown 
+                        weight="bold" 
+                        className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${openIndex === idx ? "rotate-180" : ""}`} 
+                      />
+                    </div>
+                    <AnimatePresence>
+                      {openIndex === idx && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="bg-white/30 dark:bg-black/10 backdrop-blur-md"
+                        >
+                          <div className="px-6 pb-6 text-foreground/80 leading-relaxed border-t border-black/5 dark:border-white/5 pt-4">
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                  <AnimatePresence>
-                    {openIndex === idx && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="bg-white"
-                      >
-                        <div className="px-6 pb-6 text-foreground/70 leading-relaxed border-t border-black/5 pt-4">
-                          {faq.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                </SpotlightCard>
               </AnimatedItem>
             </AnimatedSection>
           ))}
@@ -74,19 +77,22 @@ export default function FaqSection() {
         
         <AnimatedSection className="mt-32 text-center">
           <AnimatedItem>
-            <div className="card-surface p-12 bg-gradient-to-br from-white to-blue-50 border border-blue-100">
-              <h2 className="text-3xl font-bold mb-6 text-blue-900">空気の変化が体感できる</h2>
-              <p className="text-blue-900/70 mb-8 max-w-xl mx-auto leading-relaxed">
-                都会のビルの一室なのに大自然の中の早朝のような、深呼吸したくなる気持ちよさ。Air Futureで新しい空間体験を。
-              </p>
-              <a 
-                href="https://airfuture.base.shop/items/136187294" 
-                target="_blank" 
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-blue-600/30 transition-all hover:scale-105 active:scale-95"
-              >
-                購入の申込はこちら
-              </a>
-            </div>
+            <SpotlightCard className="glass-deep p-12 bg-gradient-to-br from-blue-50/50 to-white/50 dark:from-blue-900/20 dark:to-background border border-blue-100/50 dark:border-blue-800/30">
+              <div className="relative z-10">
+                <h2 className="text-3xl font-bold mb-6 text-blue-900 dark:text-blue-100">空気の変化が体感できる</h2>
+                <p className="text-blue-900/70 dark:text-blue-200/70 mb-8 max-w-xl mx-auto leading-relaxed">
+                  都会のビルの一室なのに大自然の中の早朝のような、深呼吸したくなる気持ちよさ。Air Futureで新しい空間体験を。
+                </p>
+                <MagneticButton 
+                  as="a"
+                  href="https://airfuture.base.shop/items/136187294" 
+                  target="_blank" 
+                  className="mx-auto max-w-xs bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-[24px] shadow-lg shadow-blue-600/30 transition-colors"
+                >
+                  購入の申込はこちら
+                </MagneticButton>
+              </div>
+            </SpotlightCard>
           </AnimatedItem>
         </AnimatedSection>
       </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { clsx } from "clsx";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,10 +17,13 @@ export default function Navbar() {
 
   return (
     <nav className={clsx(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-      scrolled ? "bg-black/50 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+      scrolled ? "px-4 py-3" : "px-6 py-4"
     )}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className={clsx(
+        "max-w-7xl mx-auto flex items-center justify-between transition-all duration-500 rounded-[24px]",
+        scrolled ? "glass-deep px-6 py-3" : "bg-transparent"
+      )}>
         <div className="text-white font-bold text-2xl tracking-tighter">
           AIR FUTURE
         </div>
@@ -29,13 +33,14 @@ export default function Navbar() {
           <a href="#" className="hover:text-white transition-colors">特徴</a>
           <a href="#" className="hover:text-white transition-colors">よくある質問</a>
         </div>
-        <a 
+        <MagneticButton 
+          as="a"
           href="https://airfuture.base.shop/items/136187294" 
           target="_blank"
-          className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-6 py-2 rounded-full text-sm font-bold transition-colors"
+          className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-3 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-colors"
         >
           購入する
-        </a>
+        </MagneticButton>
       </div>
     </nav>
   );

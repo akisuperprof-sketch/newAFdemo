@@ -71,3 +71,67 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* --- 60fps & glass3d Enhancements --- */
+
+/* Deep Glassmorphism (glass3d.dev style) */
+.glass-deep {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+.glass-deep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url('/noise.svg');
+  opacity: 0.8;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.dark .glass-deep {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Spotlight Properties */
+@property --inner-size {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0px;
+}
+@property --outer-size {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.reveal-layer {
+  transition: --inner-size 0.3s ease-in-out, --outer-size 0.3s ease-in-out;
+  mask-image: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black var(--inner-size, 0%),
+    transparent var(--outer-size, 0%)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black var(--inner-size, 0%),
+    transparent var(--outer-size, 0%)
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  pointer-events: none;
+}
+.group:hover .reveal-layer {
+  --inner-size: 80px;
+  --outer-size: 200px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-layer {
+    transition: none !important;
+  }
+}
