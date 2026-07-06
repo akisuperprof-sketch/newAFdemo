@@ -10,6 +10,8 @@ interface MagneticButtonProps {
   onClick?: () => void;
   as?: React.ElementType;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export default function MagneticButton({
