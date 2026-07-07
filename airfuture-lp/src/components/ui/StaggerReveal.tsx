@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 interface StaggerRevealProps {
   text: string;
@@ -12,7 +12,7 @@ export default function StaggerReveal({ text, className = "", delay = 0 }: Stagg
   // Split text into characters
   const characters = text.split("");
 
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
@@ -20,7 +20,7 @@ export default function StaggerReveal({ text, className = "", delay = 0 }: Stagg
     }),
   };
 
-  const child = {
+  const child: Variants = {
     visible: {
       opacity: 1,
       y: 0,
