@@ -33,7 +33,18 @@ export default function Navbar() {
           <a href="#" className="hover:text-white transition-colors">特徴</a>
           <a href="#" className="hover:text-white transition-colors">よくある質問</a>
         </div>
-        <MagneticButton 
+        <div className="flex items-center gap-4">
+          <a 
+            href="/next-level"
+            className="text-white text-xs font-bold px-4 py-2 rounded-full border border-purple-500/50 bg-purple-500/10 hover:bg-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all flex items-center gap-2"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+            </span>
+            Next Level
+          </a>
+          <MagneticButton 
           as="a"
           href="https://airfuture.base.shop/items/136187294" 
           target="_blank"
@@ -41,6 +52,7 @@ export default function Navbar() {
         >
           購入する
         </MagneticButton>
+        </div>
       </div>
     </nav>
   );
